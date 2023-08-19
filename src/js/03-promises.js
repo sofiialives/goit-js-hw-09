@@ -18,7 +18,7 @@ form.addEventListener('submit', onSubmit);
 
 function onSubmit(event) {
   event.preventDefault();
-  const delay = Number(form.elements.delay.value);
+  let delay = Number(form.elements.delay.value);
   const step = Number(form.elements.step.value);
   const amount = Number(form.elements.amount.value);
   let position = 0;
@@ -31,6 +31,7 @@ function onSubmit(event) {
       .catch(({ position, delay }) => {
         Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
+      delay+=step
   }
   form.reset()
 }
