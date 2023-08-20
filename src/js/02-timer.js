@@ -30,6 +30,10 @@ const spanHours = document.querySelector('[data-hours]');
 const spanMinutes = document.querySelector('[data-minutes]');
 const spanSeconds = document.querySelector('[data-seconds]');
 const inputValue = document.getElementById('datetime-picker');
+const timer = document.querySelector('.timer')
+timer.style.display = 'flex'
+timer.style.gap = '50px'
+timer.style.paddingTop = '15px'
 
 const options = {
   enableTime: true,
@@ -49,15 +53,16 @@ flatpickr(inputValue, options);
 
 startButton.addEventListener('click', onFunction);
 
+
 function onFunction() {
   let counter = setInterval(() => {
     let futureDate = new Date(inputValue.value) - Date.now(); 
     if(futureDate >= 0){
         let toTheDate = convertMs(futureDate);
-        spanDays.textContent = toTheDate.days;
-        spanHours.textContent = toTheDate.hours;
-        spanMinutes.textContent = toTheDate.minutes;
-        spanSeconds.textContent = toTheDate.seconds;
+        spanDays.textContent = addLeadingZero(toTheDate.days);
+        spanHours.textContent = addLeadingZero(toTheDate.hours);
+        spanMinutes.textContent = addLeadingZero(toTheDate.minutes);
+        spanSeconds.textContent = addLeadingZero(toTheDate.seconds);
     }else{
         clearInterval(counter)
     }
